@@ -45,15 +45,16 @@ function obfuscate() {
     }
 }
 
-Object.prototype.replaceColorCodes = function() {
-    var raw_text = this.innerText;
-    var parsed_html = document.createElement('span');
-
-    if (raw_text.indexOf('\\n') > -1) {
+String.prototype.replaceColorCodes = function() {
+    let parsed_html = document.createElement('span');
+    let obfuscated = false;
+    raw_text = this;
+    if (raw_text.includes('\\n') == true) {
         var lines = raw_text.split('\\n');
-    } else if (raw_text.indexOf('\n') > -1) {
+    } else if (raw_text.includes('\n') == true) {
         var lines = raw_text.split('\n');
-    }
+    } else
+        var lines = [raw_text];
 
     for (var line of lines) {
         var color = '';
@@ -74,6 +75,7 @@ Object.prototype.replaceColorCodes = function() {
                     style = '';
                 } else if (tag === '§k') {
                     elem.className = 'obfuscated';
+                    obfuscated = true;
                 }
                 block = block.replace(tag, '');
             }
@@ -89,6 +91,7 @@ Object.prototype.replaceColorCodes = function() {
         var color = '';
         var style = '';
     }
-    var randomize_obfuscated = setInterval(obfuscate, 50);
-    return parsed_html;
+    if (obfuscated) var randomize_obfuscated = setInterval(obfuscate, 50);
+
+    return parsed_html.innerHTML;
 }

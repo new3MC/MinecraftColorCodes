@@ -34,7 +34,7 @@ You can also link the JS file at the bottom of the webpage, right before the ```
 Now you can use it!
 
 #### Usage
-It will find HTML elements that their id is "MOTD" and translate its text inside of it with css properties.
+It will find HTML elements that their Ids are  "MOTD" and convert their text inside of them with colors and styles of Minecraft.
 Example:
 
 ```javascript
@@ -44,9 +44,9 @@ Example:
 </body>
 <script src="MinecraftColorCodes.js"></script>
 <script>
-    var old_MOTD = document.getElementById("MOTD");
+    var old_MOTD = document.getElementById("MOTD").innerText;
     var new_MOTD = old_MOTD.replaceColorCodes();
-    old_MOTD.replaceChild(new_MOTD, old_MOTD.childNodes[0]);
+    document.getElementById("MOTD").innerHTML = new_MOTD;
 </script>
 ```
 Simple enough. Get your string, attach the function at the end (Don't forget the brackets, they are essential) and voila! You can then do whatever you like with it!
